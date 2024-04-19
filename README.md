@@ -5,3 +5,8 @@ Globally, coastal areas including Massachusetts coastal areas are facing the loo
 
 ## Purpose
 The primary purpose of this project is to assess the vulnerability of coastal areas in Massachusetts to sea level rise specifically 1 meter sea level rise and its associated impacts. By creating detailed maps that visualize areas at risk of inundation under various sea level rise scenarios, stakeholders can better understand the magnitude of the threat and prioritize adaptation and mitigation measures. Additionally, identifying critical infrastructures, residential areas, and ecological habitats that may be impacted allows for targeted interventions to protect assets, safeguard communities, and preserve important ecosystems in the face of climate change.
+
+## Importance
+- Helps to quantify vulnerability of coastal areas as well as identifies specific areas of concern facilitating the development of adaptation strategies that minimize risks and maximize societal and ecological benefits.
+- It promotes collaboration in implementing solutions that ensure the long-term sustainability and vitality of coastal communities and ecosystems by raising awareness about the impacts of sea level rise and the need for concerted action among diverse stakeholders.
+- The project contributes to building a more resilient and climate-resilient future for the state by tackling the challenges posed by sea level rise head-on.
