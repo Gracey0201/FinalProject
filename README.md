@@ -97,8 +97,13 @@ _All the tables created in this analysis are normalized, that is, they are all i
 
 - They also meet the requirements of 3NF as they are already in 1NF and 2NF, and there are no transitive dependencies among non-prime attributes, each non-key attribute in thes tables are  directly dependent on the primary key (gid). Therefore, they meet the requirements of the 3NF.
 
+ #### Fouth Normal Form (4NF)
+
+There seems not to be any multi-valued dependencies present in all the tables. Each attribute seems to depend only on the primary key (gid) and not on combinations of other non-key attributes.
+They thsrefore satisfy the requirements for Fourth Normal Form (4NF), given that they are already in 3NF, and there are no multi-valued dependencies present as each attribute seems to depend only on the primary key (gid) and not on combinations of other non-key attributes.
+
+
 ### Tables
-### Uploading tables
 ### Aquatic Core Table
 ![Aquatic core table](https://github.com/Gracey0201/FinalProject/blob/main/Tables/Aquatic_core.PNG)
 
