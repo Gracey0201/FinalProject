@@ -127,8 +127,29 @@ They thsrefore satisfy the requirements for Fourth Normal Form (4NF), given that
 ### Major Roads Table
 ![Major Roads Table](https://github.com/Gracey0201/FinalProject/blob/main/Tables/major_roads.PNG)
 
-### [Roads table
+### Roads table
 ![Roads table](https://github.com/Gracey0201/FinalProject/blob/main/Roads.PNG)
+
+### Road Table2
+![Roads2 table](https://github.com/Gracey0201/FinalProject/blob/main/Roads2.PNG)
+
+### Building Table
+![Building Table](https://github.com/Gracey0201/FinalProject/blob/main/Cleaned%20Table/Building.PNG)
+
+### Community Health Center Table
+![Community Health Center Table](https://github.com/Gracey0201/FinalProject/blob/main/Cleaned%20Table/Community_health_center.PNG)
+
+### Community Health Center Table2
+![Community Health Center2 Table](https://github.com/Gracey0201/FinalProject/blob/main/Cleaned%20Table/Community_health_center2.PNG)
+
+### Rare Species Core Table
+![Rare Species Core Table](https://github.com/Gracey0201/FinalProject/blob/main/Cleaned%20Table/Rarespecies.PNG)
+
+
+
+
+
+
 
 
 
