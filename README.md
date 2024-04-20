@@ -76,6 +76,21 @@ geom GEOMETRY
 SELECT gid, shape_area, shape_len,  geom
 FROM aquaticcore_vector;`
 
+`CREATE TABLE rarespecies_clean_vector(
+gid int PRIMARY KEY,
+ac_ch_rare numeric,
+town varchar(255),
+ac_rscxtwn numeric,
+shape_area numeric,
+shape_len numeric,
+geom GEOMETRY
+);`
+
+-- populate the new table with columns
+`INSERT INTO building_clean_vector(gid, ac_ch_rare, town, ac_rscxtwn, shape_area, shape_len, geom)
+SELECT gid, ac_ch_rare, town, ac_rscxtwn, shape_area, shape_len, geom
+FROM rarespecies_vector;`
+
 ## Normalization of Tables
 Database normalization involves a systematic approach to organizing data within a database to reduce redundancy and improve data integrity.
 
