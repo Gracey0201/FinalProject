@@ -37,8 +37,8 @@ The data included in this repository are:
 ### Aquatic Core Table
 ![Aquatic core table](https://github.com/Gracey0201/FinalProject/blob/main/Tables/Aquatic_core.PNG)
 
-### Bolesholes Table2
-![boleholes table2](https://github.com/cvbate/DatabasesFlooding/blob/main/boleholes_table2.PNG)
+### Coastal Zone Table
+![Coaastal Zone](https://github.com/Gracey0201/FinalProject/blob/main/Tables/Coastalzone.PNG)
 
 
 
