@@ -40,12 +40,6 @@ The data included in this repository are:
 ### Coastal Zone Table
 ![Coaastal Zone Table](https://github.com/Gracey0201/FinalProject/blob/main/Tables/Coastalzone.PNG)
 
-### Building Table
-![Building Table](https://www.mass.gov/info-details/massgis-data-building-structures-2-d?)
-
-### Rare Species Core Table
-![Rare Species Core Table](https://www.mass.gov/info-details/massgis-data-biomap-the-future-of-conservation?)
-
 ### Coastline Table
 ![Coastline Table](https://github.com/Gracey0201/FinalProject/blob/main/Tables/Coastline.PNG)
 
