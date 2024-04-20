@@ -15,13 +15,21 @@ The primary purpose of this project is to assess the vulnerability of coastal ar
 The data included in this repository are:
 
 1 Digitized Elevation Model(DEM) (TIF) [(https://coast.noaa.gov/slrdata/)]
+
 2 Aquatic Core (SHP) [(https://www.mass.gov/info-details/massgis-data-biomap-the-future-of-conservation?)]
+
 3 Rare Species Core (SHP)  [(https://www.mass.gov/info-details/massgis-data-biomap-the-future-of-conservation?)]
+
 4 Forest  Core (SHP)  [(https://www.mass.gov/info-details/massgis-data-biomap-the-future-of-conservation?)]
+
 5 Building (SHP)  [(https://www.mass.gov/info-details/massgis-data-building-structures-2-d?)]
+
 6 Cropland (SHP) [(https://www.mass.gov/info-details/massgis-data-2016-land-coverland-use?)]
+
 7 Community Health Centers (SHP) [(https://www.mass.gov/info-details/massgis-data-community-health-centers)]
+
 8 Roads (SHP) [(https://www.mass.gov/info-details/massgis-data-massgis-massdot-roads)]
+
 9 Major Roads (SHP) [(https://www.mass.gov/info-details/massgis-data-massgis-massdot-roads)]
 
 
