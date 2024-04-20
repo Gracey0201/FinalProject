@@ -127,5 +127,8 @@ They thsrefore satisfy the requirements for Fourth Normal Form (4NF), given that
 ### Major Roads Table
 ![Major Roads Table](https://github.com/Gracey0201/FinalProject/blob/main/Tables/major_roads.PNG)
 
+### [Roads table
+![Roads table](https://github.com/Gracey0201/FinalProject/blob/main/Roads.PNG)
+
 
 
