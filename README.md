@@ -38,7 +38,25 @@ The data included in this repository are:
 ![Aquatic core table](https://github.com/Gracey0201/FinalProject/blob/main/Tables/Aquatic_core.PNG)
 
 ### Coastal Zone Table
-![Coaastal Zone](https://github.com/Gracey0201/FinalProject/blob/main/Tables/Coastalzone.PNG)
+![Coaastal Zone Table](https://github.com/Gracey0201/FinalProject/blob/main/Tables/Coastalzone.PNG)
+
+### Building Table
+![Building Table](https://www.mass.gov/info-details/massgis-data-building-structures-2-d?)
+
+### Rare Species Core Table
+![Rare Species Core Table](https://www.mass.gov/info-details/massgis-data-biomap-the-future-of-conservation?)
+
+### Coastline Table
+![Coastline Table](https://github.com/Gracey0201/FinalProject/blob/main/Tables/Coastline.PNG)
+
+### Cropland Table
+![Cropland Table](https://github.com/Gracey0201/FinalProject/blob/main/Tables/Cropland.PNG)
+
+### Forest Core Table
+![Forest Core Table](https://github.com/Gracey0201/FinalProject/blob/main/Tables/Forest_core.PNG)
+
+### Major Roads Table
+![Major Roads Table](https://github.com/Gracey0201/FinalProject/blob/main/Tables/major_roads.PNG)
 
 
 
