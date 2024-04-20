@@ -32,6 +32,14 @@ The data included in this repository are:
 
 9 Major Roads (SHP) [(https://www.mass.gov/info-details/massgis-data-massgis-massdot-roads)]
 
+ I projected all my data to Massachusetts  WGS 84.
+
+#### Preprocessing in ArcPro
+
+I had to preform some basic preprocessing of my data before using the them. I clipped all of my vecotor and raster data to the Massachusetts Coastal zone boundary  to reduce computational expenses during our analysis. We also double checked the projection and re-projected our data to WGS 1984 to ensure no errors related to projection were to occur.
+
+## Methodology
+
 ### Tables
 ### Uploading tables
 ### Aquatic Core Table
