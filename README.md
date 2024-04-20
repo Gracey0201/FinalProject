@@ -42,11 +42,11 @@ I had to preform some basic preprocessing of my data before using the them. I cl
 - Generate tables both raster and vector needed for datanormalization in the analysis
     - I had many vector tables which can be found below and one raster table (DEM)
       
-- First, I converted all the shapefiles to sql files by using the shp2pgsql function. An example of this code is:
+- I converted all the shapefiles to sql files by using the shp2pgsql function. An example of this code is:
 
 `"C:\Users\default.DESKTOP-GCP9U73\OneDrive - Clark University\Documents\DATABASE MANAGEMENT\FinalProject">"C:\Program Files\PostgreSQL\16\bin\shp2pgsql" -s 4326 -I Data\Buildings.shp building_vector > building.sql`
 
-- Next I also converted my raster into .sql files using the raster2pgsql function. An example of this code is:
+- Next, I also converted my raster into .sql files using the raster2pgsql function. An example of this code is:
 
   `"C:\Users\default.DESKTOP-GCP9U73\OneDrive - Clark University\Documents\DATABASE MANAGEMENT\FinalProject">"C:\Program Files\PostgreSQL\16\bin\raster2pgsql" -s 4326 -t 1000x1000 -I -C -M  Data\Clipped_DEM.tif elevation > DEM.sql`
 
@@ -54,7 +54,7 @@ I had to preform some basic preprocessing of my data before using the them. I cl
   
 `pgsql -U postgres -d Flooding -f "C:\Users\rutha\OneDrive - Clark University\Documents\SpatialDatabase\FloodingProject\LocalVersion\boreholes.sql"`
 
-- I created empty tables for some of my vector layers, like the Aquatic core table and populating them with columns from the original data relevent to my analysis. Using the code below.
+- I created empty tables for some of my vector layers, like the Aquatic core table, populating them with columns from the original data relevent to my analysis. Using the code below.
 
   `CREATE TABLE aquaticcore_clean_vector(
 gid int PRIMARY KEY,
