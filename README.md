@@ -24,7 +24,7 @@ The data included in this repository are:
 
 4 Forest  Core (SHP)  [(https://www.mass.gov/info-details/massgis-data-biomap-the-future-of-conservation?)]
 
-5 Building (SHP)  [(https://www.mass.gov/info-details/massgis-data-building-structures-2-d?)]
+5 Building Structures (SHP)  [(https://www.mass.gov/info-details/massgis-data-building-structures-2-d?)]
 
 6 Cropland (SHP) [(https://www.mass.gov/info-details/massgis-data-2016-land-coverland-use?)]
 
