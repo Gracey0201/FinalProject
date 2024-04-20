@@ -10,3 +10,8 @@ The primary purpose of this project is to assess the vulnerability of coastal ar
 - Helps to quantify vulnerability of coastal areas as well as identifies specific areas of concern facilitating the development of adaptation strategies that minimize risks and maximize societal and ecological benefits.
 - It promotes collaboration in implementing solutions that ensure the long-term sustainability and vitality of coastal communities and ecosystems by raising awareness about the impacts of sea level rise and the need for concerted action among diverse stakeholders.
 - The project contributes to building a more resilient and climate-resilient future for the state by tackling the challenges posed by sea level rise head-on.
+
+## Data
+The data included in this repository are:
+Digitized Elevation Model(DEM) [(https://coast.noaa.gov/slrdata/)]
+
