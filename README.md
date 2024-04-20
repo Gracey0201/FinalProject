@@ -40,6 +40,14 @@ I had to preform some basic preprocessing of my data before using the them. I cl
 
 ## Methodology
 
+- Create Sealevelrise database and enable  postgis extenstion
+- Generate tables both raster and vector needed for datanormalization in the analysis
+    - I had many vector tables which can be found below and one raster table (DEM)
+      
+- First, I converted all the shapefiles to sql files by using the shp2pgsql function. An example of this code is:
+
+"C:\Users\default.DESKTOP-GCP9U73\OneDrive - Clark University\Documents\DATABASE MANAGEMENT\FinalProject">"C:\Program Files\PostgreSQL\16\bin\shp2pgsql" -s 4326 -I Data\Buildings.shp building_vector > building.sql
+
 ### Tables
 ### Uploading tables
 ### Aquatic Core Table
