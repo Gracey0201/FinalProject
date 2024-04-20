@@ -34,9 +34,9 @@ The data included in this repository are:
 
  I projected all my data to Massachusetts  WGS 84.
 
-#### Preprocessing in ArcPro
+#### Preprocessing in QGIS
 
-I had to preform some basic preprocessing of my data before using the them. I clipped all of my vecotor and raster data to the Massachusetts Coastal zone boundary  to reduce computational expenses during our analysis. We also double checked the projection and re-projected our data to WGS 1984 to ensure no errors related to projection were to occur.
+I had to preform some basic preprocessing of my data before using the them. I clipped all of my vecotor and raster data to the Massachusetts Coastal zone boundary  to optimize computational resources during our analysis. I also projected all my data to EPSG:26986 - NAD83 / Massachusetts Mainland to avoid no errors as a result of projection from occurring.
 
 ## Methodology
 
