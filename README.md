@@ -81,6 +81,21 @@ Database normalization involves a systematic approach to organizing data within 
 - To maintain consistent relationships between tables.
 - To facilitate easier database maintenance and updates.
 
+### Checking for Normalization
+
+_All the tables created in this analysis are normalized, that is, they are all in 1NF, 2NF, 3NF and 4NF because of the reasons stated below_
+
+#### First Normal Form (1NF)
+
+- There are no multiple values stored in a single cell of these tables, thereby reducing complexity.
+
+#### Second Normal Form (2NF)
+
+- Since the tables are already in 1NF, and there are no partial dependencies (that is, all non-prime attributes are depending on the entire primary key), therefore, they satisfies Second Normal Form (2NF).
+
+#### Third Normal Form (3NF)
+
+- They also meet the requirements of 3NF as they are already in 1NF and 2NF, and there are no transitive dependencies among non-prime attributes, each non-key attribute in thes tables are  directly dependent on the primary key (gid). Therefore, they meet the requirements of the 3NF.
 
 ### Tables
 ### Uploading tables
