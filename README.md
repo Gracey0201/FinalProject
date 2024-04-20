@@ -38,6 +38,9 @@ I had to preform some basic preprocessing of my data before using the them. I cl
 
 ![MA Coastal Map](https://github.com/Gracey0201/FinalProject/blob/main/Maps/MA%20Coasatal%20Map.PNG)
 
+![MA Coastal Map2](https://github.com/Gracey0201/FinalProject/blob/main/Maps/MA%20Coastal%20Map2.PNG)
+
+
 ## Methodology
 
 - Create Sealevelrise database and enable  postgis extenstion
