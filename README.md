@@ -32,8 +32,13 @@ The data included in this repository are:
 
 9 Major Roads (SHP) [(https://www.mass.gov/info-details/massgis-data-massgis-massdot-roads)]
 
-## Tables
-Aquatic Core [(https://github.com/Gracey0201/FinalProject/blob/main/Tables/Aquatic_core.PNG)]
+### Tables
+### Uploading tables
+### Aquatic Core Table
+![boleholes table](https://github.com/cvbate/DatabasesFlooding/blob/main/boleholes_table.PNG)
+
+### Bolesholes Table2
+![boleholes table2](https://github.com/cvbate/DatabasesFlooding/blob/main/boleholes_table2.PNG)
 
 
 
