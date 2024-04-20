@@ -32,8 +32,6 @@ The data included in this repository are:
 
 9 Major Roads (SHP) [(https://www.mass.gov/info-details/massgis-data-massgis-massdot-roads)]
 
- I projected all my data to Massachusetts  WGS 84.
-
 #### Preprocessing in QGIS
 
 I had to preform some basic preprocessing of my data before using the them. I clipped all of my vecotor and raster data to the Massachusetts Coastal zone boundary  to optimize computational resources during our analysis. I also projected all my data to EPSG:26986 - NAD83 / Massachusetts Mainland to avoid no errors as a result of projection from occurring.
