@@ -87,6 +87,7 @@ geom GEOMETRY
 );`
 
 -- populate the new table with columns
+
 `INSERT INTO building_clean_vector(gid, ac_ch_rare, town, ac_rscxtwn, shape_area, shape_len, geom)
 SELECT gid, ac_ch_rare, town, ac_rscxtwn, shape_area, shape_len, geom
 FROM rarespecies_vector;`
