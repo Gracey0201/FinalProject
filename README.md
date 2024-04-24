@@ -92,6 +92,100 @@ geom GEOMETRY
 SELECT gid, ac_ch_rare, town, ac_rscxtwn, shape_area, shape_len, geom
 FROM rarespecies_vector;`
 
+## Coastal Zone Analysis: Understanding Infrastructure and Habitat Dynamics in Massachusetts
+_dentify Infrastructure within the Coastal Zone_
+`SELECT 
+    b.* -- columns from building data
+FROM 
+    building_clean_vector b,
+    coastalzone_vector cz
+WHERE 
+    ST_Intersects(b.geom, cz.geom);`
+	
+
+`SELECT	
+	c.*, -- columns from cropland data
+    h.* -- columns from health centers data
+FROM 
+    cropland_vector c,
+    community_health_clean_vector h,
+	coastalzone_vector cz
+WHERE 
+    ST_Intersects(c.geom, cz.geom)
+    AND ST_Intersects(h.geom, cz.geom);`
+    
+`SELECT
+   r.*,  -- columns from roads data
+   m.*  -- columns from major roads
+FROM 
+    roads_vector r,
+	majorroads_vector m,
+    coastalzone_vector cz
+WHERE 
+    ST_Intersects(r.geom, cz.geom)
+    AND ST_Intersects(m.geom, cz.geom);`
+
+_Overlay Analysis_
+`SELECT 
+    l.*, -- columns from land use/land cover data
+    b.*  -- columns from building data
+FROM 
+    lulc l,
+    building_clean_vector b,
+    coastalzone_vector cz
+WHERE 
+    ST_Intersects(l.rast, b.geom)
+    AND ST_Intersects(l.rast, cz.geom);`
+
+_Buffer Analysis_
+`CREATE TABLE community_health_centers_buffer AS
+SELECT 
+    h.*, -- columns from health centers data
+    ST_Buffer(h.geom, 1000) AS buffer_geom -- buffer radius is 1000 meters
+FROM 
+    community_health_clean_vector h,
+    coastalzone_vector cz
+WHERE 
+    ST_Intersects(h.geom, cz.geom);`
+	
+_Distance Analysis_
+`SELECT 
+    h.gid AS community_health_center_id, 
+    r.gid AS road_id, 
+    ST_Distance(h.geom, r.geom) AS distance
+FROM 
+    community_health_clean_vector h,
+    roads_vector r,
+    coastalzone_vector cz
+WHERE 
+    ST_Intersects(h.geom, cz.geom)
+    AND ST_DWithin(h.geom, r.geom, 5000);`-- considering roads within 5 km of health centers
+
+_Identify Cropland within Aquatic Core Areas_
+- Determining the extent of cropland within aquatic core areas.
+`CREATE TABLE cropland_in_aquatic_core AS
+SELECT c.gid AS cropland_id,
+       c.geom AS cropland_geom,
+       a.gid AS aquatic_core_id,
+       a.geom AS aquatic_core_geom
+FROM cropland_vector c
+JOIN aquaticcore_clean_vector a ON ST_Intersects(c.geom, a.geom);`
+
+### Codes I was trying to run with Kunal
+- first we tried to change the raster to polygon
+`SELECT val, ST_AsText(geom) As 
+FROM elevation
+SELECT dp.*
+FROM elevation, LATERAL ST_DumpAsPolygons(rast) AS dp
+) As foo;`
+
+# Identify Elevation Points within Coastal Zone:
+`CREATE TABLE elevation_coastal AS
+SELECT *
+FROM elevation
+WHERE ST_Intersects(geom, (SELECT geom FROM coastalzone));`
+
+
 ## Normalization of Tables
 Database normalization involves a systematic approach to organizing data within a database to reduce redundancy and improve data integrity.
 
