@@ -168,7 +168,7 @@ WHERE
 
 _Identify Cropland within Aquatic Core Areas_
 
-- Determining the extent of cropland within aquatic core areas.
+- Determining the extent of cropland within aquatic core areas
 
 `CREATE TABLE cropland_in_aquatic_core AS
 SELECT c.gid AS cropland_id,
@@ -188,7 +188,7 @@ SELECT dp.*
 FROM elevation, LATERAL ST_DumpAsPolygons(rast) AS dp
 ) As foo;`
 
-# Identify Elevation Points within Coastal Zone:
+_ Identify Elevation Points within Coastal Zone_
 
 `CREATE TABLE elevation_coastal AS
 SELECT *
