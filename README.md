@@ -46,7 +46,7 @@ The data included in this repository are:
 
 ![GEE code](https://github.com/Gracey0201/FinalProject/blob/main/GEE%20code.PNG)
 
-![GEE code2](https://github.com/Gracey0201/FinalProject/blob/main/GEE%20code.PNG)
+![GEE code2](https://github.com/Gracey0201/FinalProject/blob/main/GEE%20code2.PNG)
 
 
 
