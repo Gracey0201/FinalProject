@@ -201,7 +201,7 @@ WHERE EXISTS (
 
 ## Coastal Zone Analysis: Understanding Infrastructure and Habitat Dynamics in Massachusetts
 
-_dentify Infrastructure within the Coastal Zone_
+_Identify Infrastructure within the Coastal Zone_
 
 `SELECT 
     b.* -- columns from building data
