@@ -48,7 +48,7 @@ The data included in this repository are:
 
 I had to preform some basic preprocessing of my data before using the them. I clipped all of my vecotor and raster data to the Massachusetts Coastal zone boundary  to optimize computational resources during our analysis. I also projected all my data to EPSG:26986 - NAD83 / Massachusetts Mainland to avoid no errors as a result of projection from occurring.
 
-![MA Coastal Map](https://github.com/Gracey0201/FinalProject/blob/main/Alllayermap.PNG)
+![MA Coastal Map](https://github.com/Gracey0201/FinalProject/blob/main/Mainmap.PNG)
 
 ![MA Coastal Map2](https://github.com/Gracey0201/FinalProject/blob/main/finapprojectmap.PNG)
 
@@ -102,8 +102,78 @@ geom GEOMETRY
 SELECT gid, ac_ch_rare, town, ac_rscxtwn, shape_area, shape_len, geom
 FROM rarespecies_vector;`
 
-- I used the query below to speed the spatial query relating to the elevation table
+## Normalization of Tables
+Database normalization involves a systematic approach to organizing data within a database to reduce redundancy and improve data integrity.
 
+### Reasons for Normalization
+
+- To prevent redundancy in data.
+- To simplify database structure.
+- To maintain consistent relationships between tables.
+- To facilitate easier database maintenance and updates.
+
+### Checking for Normalization
+
+_All the tables created in this analysis are normalized, that is, they are all in 1NF, 2NF, 3NF and 4NF because of the reasons stated below_
+
+#### First Normal Form (1NF)
+
+- There are no multiple values stored in a single cell of these tables, thereby reducing complexity.
+
+#### Second Normal Form (2NF)
+
+- Since the tables are already in 1NF, and there are no partial dependencies (that is, all non-prime attributes are depending on the entire primary key), therefore, they satisfies Second Normal Form (2NF).
+
+#### Third Normal Form (3NF)
+
+- They also meet the requirements of 3NF as they are already in 1NF and 2NF, and there are no transitive dependencies among non-prime attributes, each non-key attribute in thes tables are  directly dependent on the primary key (gid). Therefore, they meet the requirements of the 3NF.
+
+ #### Fouth Normal Form (4NF)
+
+There seems not to be any multi-valued dependencies present in all the tables. Each attribute seems to depend only on the primary key (gid) and not on combinations of other non-key attributes.
+They thsrefore satisfy the requirements for Fourth Normal Form (4NF), given that they are already in 3NF, and there are no multi-valued dependencies present as each attribute seems to depend only on the primary key (gid) and not on combinations of other non-key attributes.
+
+
+### Tables
+### Aquatic Core Table
+![Aquatic core table](https://github.com/Gracey0201/FinalProject/blob/main/Tables/Aquatic_core.PNG)
+
+### Coastal Zone Table
+![Coaastal Zone Table](https://github.com/Gracey0201/FinalProject/blob/main/Tables/Coastalzone.PNG)
+
+### Coastline Table
+![Coastline Table](https://github.com/Gracey0201/FinalProject/blob/main/Tables/Coastline.PNG)
+
+### Cropland Table
+![Cropland Table](https://github.com/Gracey0201/FinalProject/blob/main/Tables/Cropland.PNG)
+
+### Forest Core Table
+![Forest Core Table](https://github.com/Gracey0201/FinalProject/blob/main/Tables/Forest_core.PNG)
+
+### Major Roads Table
+![Major Roads Table](https://github.com/Gracey0201/FinalProject/blob/main/Tables/major_roads.PNG)
+
+### Roads table
+![Roads table](https://github.com/Gracey0201/FinalProject/blob/main/Roads.PNG)
+
+### Road Table2
+![Roads2 table](https://github.com/Gracey0201/FinalProject/blob/main/Roads2.PNG)
+
+### Building Table
+![Building Table](https://github.com/Gracey0201/FinalProject/blob/main/Cleaned%20Table/Building.PNG)
+
+### Community Health Center Table
+![Community Health Center Table](https://github.com/Gracey0201/FinalProject/blob/main/Cleaned%20Table/Community_health_center.PNG)
+
+### Community Health Center Table2
+![Community Health Center2 Table](https://github.com/Gracey0201/FinalProject/blob/main/Cleaned%20Table/Community_health_center2.PNG)
+
+### Rare Species Core Table
+![Rare Species Core Table](https://github.com/Gracey0201/FinalProject/blob/main/Cleaned%20Table/Rarespecies.PNG)
+
+## Spatial Query
+- I used the query below to speed the spatial query relating to the elevation table
+- 
   -- Create spatial indexes for performance optimization
 `CREATE INDEX IF NOT EXISTS idx_coastalzone_geom ON coastalzone USING GIST (geom);
 CREATE INDEX IF NOT EXISTS idx_elevation_rast ON elevation USING GIST (ST_ConvexHull(rast));`
@@ -152,6 +222,27 @@ FROM
 WHERE 
     ST_Intersects(r.geom, cz.geom)
     AND ST_Intersects(m.geom, cz.geom);`
+
+--Overlay analysis
+-- Incoporating landcover layer
+`CREATE TABLE landcover_near_building AS
+SELECT 
+    l.*, -- columns from land use/land cover data
+    b.*  -- columns from building data
+FROM 
+    lulc l,
+    building_clean_vector b,
+    coastalzone_vector cz
+WHERE 
+    ST_Intersects(l.rast, b.geom)
+    AND ST_Intersects(l.rast, cz.geom);`
+
+    `CREATE TABLE coastal_zone_land_use AS
+SELECT c.gid AS coastal_zone_id,
+       c.geom AS coastal_zone_geom,
+       l.rid
+FROM coastalzone_vector c
+JOIN lulc l ON ST_Intersects(c.geom, l.rast);`
 
 _Overlay Analysis_
 
@@ -224,105 +315,14 @@ SELECT m.gid AS roads_id,
 FROM majorroads_vector m
 JOIN coastalzone_vector c ON ST_Intersects(m.geom, c.geom);`
 
---Overlay analysis
--- Incoporating landcover 
-`CREATE TABLE landcover_near_building AS
-SELECT 
-    l.*, -- columns from land use/land cover data
-    b.*  -- columns from building data
-FROM 
-    lulc l,
-    building_clean_vector b,
-    coastalzone_vector cz
-WHERE 
-    ST_Intersects(l.rast, b.geom)
-    AND ST_Intersects(l.rast, cz.geom);`
-
-    `CREATE TABLE coastal_zone_land_use AS
-SELECT c.gid AS coastal_zone_id,
-       c.geom AS coastal_zone_geom,
-       l.rid
-FROM coastalzone_vector c
-JOIN lulc l ON ST_Intersects(c.geom, l.rast);`
+`CREATE TABLE roads_in_coastal AS
+SELECT r.gid AS roads_id,
+       r.geom AS roads_geom,
+       c.gid AS coastal_zone_id,
+       c.geom AS coastal_zone_geom
+FROM roads_vector r
+JOIN coastalzone_vector c ON ST_Intersects(r.geom, c.geom);`
 
 ![MA Coastal Map3](https://github.com/Gracey0201/FinalProject/blob/main/query2.PNG)
-
-
-
-## Normalization of Tables
-Database normalization involves a systematic approach to organizing data within a database to reduce redundancy and improve data integrity.
-
-### Reasons for Normalization
-
-- To prevent redundancy in data.
-- To simplify database structure.
-- To maintain consistent relationships between tables.
-- To facilitate easier database maintenance and updates.
-
-### Checking for Normalization
-
-_All the tables created in this analysis are normalized, that is, they are all in 1NF, 2NF, 3NF and 4NF because of the reasons stated below_
-
-#### First Normal Form (1NF)
-
-- There are no multiple values stored in a single cell of these tables, thereby reducing complexity.
-
-#### Second Normal Form (2NF)
-
-- Since the tables are already in 1NF, and there are no partial dependencies (that is, all non-prime attributes are depending on the entire primary key), therefore, they satisfies Second Normal Form (2NF).
-
-#### Third Normal Form (3NF)
-
-- They also meet the requirements of 3NF as they are already in 1NF and 2NF, and there are no transitive dependencies among non-prime attributes, each non-key attribute in thes tables are  directly dependent on the primary key (gid). Therefore, they meet the requirements of the 3NF.
-
- #### Fouth Normal Form (4NF)
-
-There seems not to be any multi-valued dependencies present in all the tables. Each attribute seems to depend only on the primary key (gid) and not on combinations of other non-key attributes.
-They thsrefore satisfy the requirements for Fourth Normal Form (4NF), given that they are already in 3NF, and there are no multi-valued dependencies present as each attribute seems to depend only on the primary key (gid) and not on combinations of other non-key attributes.
-
-
-### Tables
-### Aquatic Core Table
-![Aquatic core table](https://github.com/Gracey0201/FinalProject/blob/main/Tables/Aquatic_core.PNG)
-
-### Coastal Zone Table
-![Coaastal Zone Table](https://github.com/Gracey0201/FinalProject/blob/main/Tables/Coastalzone.PNG)
-
-### Coastline Table
-![Coastline Table](https://github.com/Gracey0201/FinalProject/blob/main/Tables/Coastline.PNG)
-
-### Cropland Table
-![Cropland Table](https://github.com/Gracey0201/FinalProject/blob/main/Tables/Cropland.PNG)
-
-### Forest Core Table
-![Forest Core Table](https://github.com/Gracey0201/FinalProject/blob/main/Tables/Forest_core.PNG)
-
-### Major Roads Table
-![Major Roads Table](https://github.com/Gracey0201/FinalProject/blob/main/Tables/major_roads.PNG)
-
-### Roads table
-![Roads table](https://github.com/Gracey0201/FinalProject/blob/main/Roads.PNG)
-
-### Road Table2
-![Roads2 table](https://github.com/Gracey0201/FinalProject/blob/main/Roads2.PNG)
-
-### Building Table
-![Building Table](https://github.com/Gracey0201/FinalProject/blob/main/Cleaned%20Table/Building.PNG)
-
-### Community Health Center Table
-![Community Health Center Table](https://github.com/Gracey0201/FinalProject/blob/main/Cleaned%20Table/Community_health_center.PNG)
-
-### Community Health Center Table2
-![Community Health Center2 Table](https://github.com/Gracey0201/FinalProject/blob/main/Cleaned%20Table/Community_health_center2.PNG)
-
-### Rare Species Core Table
-![Rare Species Core Table](https://github.com/Gracey0201/FinalProject/blob/main/Cleaned%20Table/Rarespecies.PNG)
-
-
-
-
-
-
-
 
 
