@@ -73,7 +73,21 @@ I had to preform some basic preprocessing of my data before using the them. I cl
 
 - I created empty tables for some of my vector layers, like the Aquatic core table, populating them with columns from the original data relevent to my analysis. Using the code below.
 
-  `CREATE TABLE aquaticcore_clean_vector(
+ 
+## Normalization of Tables
+Database normalization involves a systematic approach to organizing data within a database to reduce redundancy and improve data integrity.
+
+### Reasons for Normalization
+
+- To prevent redundancy in data.
+- To simplify database structure.
+- To maintain consistent relationships between tables.
+- To facilitate easier database maintenance and updates.
+
+
+  _ Creating tables from existing table to extract columns needed for my analysis_
+
+ `CREATE TABLE aquaticcore_clean_vector(
 gid int PRIMARY KEY,
 shape_area numeric,
 shape_len numeric,
@@ -101,16 +115,6 @@ geom GEOMETRY
 `INSERT INTO building_clean_vector(gid, ac_ch_rare, town, ac_rscxtwn, shape_area, shape_len, geom)
 SELECT gid, ac_ch_rare, town, ac_rscxtwn, shape_area, shape_len, geom
 FROM rarespecies_vector;`
-
-## Normalization of Tables
-Database normalization involves a systematic approach to organizing data within a database to reduce redundancy and improve data integrity.
-
-### Reasons for Normalization
-
-- To prevent redundancy in data.
-- To simplify database structure.
-- To maintain consistent relationships between tables.
-- To facilitate easier database maintenance and updates.
 
 ### Checking for Normalization
 
@@ -175,6 +179,7 @@ They thsrefore satisfy the requirements for Fourth Normal Form (4NF), given that
 - I used the query below to speed the spatial query relating to the elevation table
 - 
   -- Create spatial indexes for performance optimization
+
 `CREATE INDEX IF NOT EXISTS idx_coastalzone_geom ON coastalzone USING GIST (geom);
 CREATE INDEX IF NOT EXISTS idx_elevation_rast ON elevation USING GIST (ST_ConvexHull(rast));`
 
@@ -225,6 +230,7 @@ WHERE
 
 --Overlay analysis
 -- Incoporating landcover layer
+
 `CREATE TABLE landcover_near_building AS
 SELECT 
     l.*, -- columns from land use/land cover data
