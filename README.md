@@ -245,6 +245,9 @@ SELECT c.gid AS coastal_zone_id,
 FROM coastalzone_vector c
 JOIN lulc l ON ST_Intersects(c.geom, l.rast);`
 
+![MA Coastal Map3](https://github.com/Gracey0201/FinalProject/blob/main/query2.PNG)
+
+
 
 ## Normalization of Tables
 Database normalization involves a systematic approach to organizing data within a database to reduce redundancy and improve data integrity.
