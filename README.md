@@ -5,13 +5,21 @@ Repo for my database management class project
 ## Introduction
 Globally, coastal areas including Massachusetts coastal areas are facing the looming threat of sea level rise because of climate change. With Massachusetts having extensive coastline and diverse ecosystems, understanding the vulnerability of these coastal regions to sea level rise is essential. This project aims to analyze and map areas along the coast of Massachusetts that are susceptible to inundation from rising sea levels. By incorporating projections of future sea level rise scenarios, critical infrastructure, residential areas, and ecological habitats at risk can be identified, aiding in informed decision-making and proactive planning efforts.
 
+##
+The Massachusetts coastline boasts a diverse array of ecosystems and supports numerous human activities, including urban development, agriculture, transportation, and healthcare services. Understanding the spatial relationships between infrastructure and natural habitats within the coastal zone is crucial for effective land use planning, conservation, and sustainable development. This project aims to analyze various infrastructure layers and ecological habitats within the Massachusetts coastal zone to gain insights into their spatial interactions and potential impacts on the environment.
+
 ## Purpose
 The primary purpose of this project is to assess the vulnerability of coastal areas in Massachusetts to sea level rise specifically 1 meter sea level rise and its associated impacts. By creating detailed maps that visualize areas at risk of inundation under various sea level rise scenarios, stakeholders can better understand the magnitude of the threat and prioritize adaptation and mitigation measures. Additionally, identifying critical infrastructures, residential areas, and ecological habitats that may be impacted allows for targeted interventions to protect assets, safeguard communities, and preserve important ecosystems in the face of climate change.
+
+##
+This project seeks to assess the distribution, density, and spatial relationships of infrastructure features (such as buildings, roads, and healthcare centers) and ecological habitats (including cropland) within the Massachusetts coastal zone. By conducting spatial analyses, I seek to understand how human activities and development patterns intersect with natural ecosystems, identify areas of potential vulnerability, which will inform decision-making processes related to coastal zone management and conservation.
 
 ## Importance
 - Helps to quantify vulnerability of coastal areas as well as identifies specific areas of concern facilitating the development of adaptation strategies that minimize risks and maximize societal and ecological benefits.
 - It promotes collaboration in implementing solutions that ensure the long-term sustainability and vitality of coastal communities and ecosystems by raising awareness about the impacts of sea level rise and the need for concerted action among diverse stakeholders.
 - The project contributes to building a more resilient and climate-resilient future for the state by tackling the challenges posed by sea level rise head-on.
+- Assessing the accessibility of healthcare facilities within the coastal zone helps identify areas with limited access to essential services. This information can guide efforts to improve healthcare access and address disparities in healthcare provision.
+- : By integrating spatial analysis techniques, this project supports efforts to promote sustainable development practices that balance the needs of human populations with the conservation of coastal ecosystems
 
 ## Data
 The data included in this repository are:
