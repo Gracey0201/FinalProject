@@ -44,6 +44,12 @@ The data included in this repository are:
 
 10 Land cover (TIF)  [(https://code.earthengine.google.com/952954e5d84869f2683ab53aa0887724)]
 
+![GEE code](https://github.com/Gracey0201/FinalProject/blob/main/GEE%20code.PNG)
+
+![GEE code2](https://github.com/Gracey0201/FinalProject/blob/main/GEE%20code.PNG)
+
+
+
 #### Preprocessing in QGIS
 
 I had to preform some basic preprocessing of my data before using the them. I clipped all of my vecotor and raster data to the Massachusetts Coastal zone boundary  to optimize computational resources during our analysis. I also projected all my data to EPSG:26986 - NAD83 / Massachusetts Mainland to avoid no errors as a result of projection from occurring.
