@@ -44,6 +44,8 @@ The data included in this repository are:
 
 10 Land cover (TIF)  [(https://code.earthengine.google.com/952954e5d84869f2683ab53aa0887724)]
 
+_codes I use in downding and exporting my landcover data from Google Earth Engine_
+
 ![GEE code](https://github.com/Gracey0201/FinalProject/blob/main/GEE%20code.PNG)
 
 ![GEE code2](https://github.com/Gracey0201/FinalProject/blob/main/GEE%20code2.PNG)
