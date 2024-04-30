@@ -245,9 +245,8 @@ WHERE
 This query is essential in  understanding how different land use/land cover types are distributed in relation to infrastructure features, as well as provide insights into patterns of development, potential conflicts, and opportunities for land use planning and management within the coastal zone.
 
 `CREATE TABLE landcover_near_building AS
-SELECT 
-    l.*, -- columns from land use/land cover data
-    b.*  -- columns from building data
+SELECT l.*, -- columns from land use/land cover data
+       b.*  -- columns from building data
 FROM 
     lulc l,
     building_clean_vector b,
@@ -264,6 +263,7 @@ FROM coastalzone_vector c
 JOIN lulc l ON ST_Intersects(c.geom, l.rast);`
 
 _Buffer Analysis_
+
 This query creates a buffer around community health centers to assess accessibility and coverage within the coastal zone. It can can identify areas that are underserved or poorly served by healthcare facilities, informing decisions related to healthcare resource allocation and infrastructure development.
 
 `CREATE TABLE community_health_centers_buffer AS
@@ -277,6 +277,7 @@ WHERE
     ST_Intersects(h.geom, cz.geom);`
 	
 _Distance Analysis_
+
 This query calculates distances between community health centers and roads to understand accessibility within the coastal zone. It helps assess the proximity of healthcare facilities to transportation networks, which is crucial for ensuring accessibility for coastal communities. Also, it can highlight areas with limited access to healthcare services, guiding decisions on infrastructure development and service provision.
 
 
@@ -294,6 +295,7 @@ WHERE
     AND ST_DWithin(h.geom, r.geom, 5000);`-- considering roads within 5 km of health centers
 
 _Identify Cropland within Aquatic Core Areas_
+
 With this query, the encroachment of cropland into aquatic and rare species cores can be identified which can fragment these natural habitats, disrupting ecosystems and reducing biodiversity. They can also contribute to water quality and quantity issue as they can contribute to water pollution through the use of fertilizers, pesticides, and herbicides, affecting water quality in aquatic habitats. Further, irrigation from cropland can reduce water resources, decreasing water availability for aquatic species and other ecosystems.
 
 `CREATE TABLE cropland_in_aquatic_core AS
@@ -312,7 +314,8 @@ SELECT c.gid AS cropland_id,
 FROM cropland_vector c
 JOIN rarespecies_clean_vector ra ON ST_Intersects(c.geom, ra.geom);`
 
--- Overlay Analysis:
+_Overlay Analysis_
+
 The two queries below on major and minor roads creates new tables that contains major and minor roads and their corresponding coastal zones, providing spatial information about transportation infrastructure in coastal areas. This can be useful for various analyses, such as transportation planning, disaster response, and environmental impact assessments
 
 `CREATE TABLE majorroads_in_coastal AS
