@@ -58,7 +58,7 @@ _codes I use in downding and exporting my landcover data from Google Earth Engin
 
 I had to preform some basic preprocessing of my data before using the them. I clipped all of my vecotor and raster data to the Massachusetts Coastal zone boundary  to optimize computational resources during our analysis. I also projected all my data to EPSG:26986 - NAD83 / Massachusetts Mainland to avoid no errors as a result of projection from occurring.
 
-![MA Coastal Map](https://github.com/Gracey0201/FinalProject/blob/main/Mainmap.PNG)
+![MA Coastal Map](https://github.com/Gracey0201/FinalProject/blob/main/LayersMap.png)
 
 ![MA Coastal Map2](https://github.com/Gracey0201/FinalProject/blob/main/finapprojectmap.PNG)
 
