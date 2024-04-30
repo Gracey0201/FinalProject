@@ -343,4 +343,11 @@ _map below is the result of the spatial queries above_
 
 ![MA Coastal Map3](https://github.com/Gracey0201/FinalProject/blob/main/query2.PNG)
 
+## Challenges
+- I had issues with elevation data whic prevented the initial objective of creating a sea level rise map. This limitation might likely stemmed from inaccuracy of the elevation data. This hindered my creation of flood inundation model and other analyses related to sea level rise impacts.
+- I also ran to issue of created some tables to incorporate in my analysis but it produce just the table name and column without populating the columns.
+
+## Conclusion
+The analysis carried out in this project was focused on understanding the spatial relationships and assessing the impacts of infrastructure and ecological habitat dynamics within the Massachusetts coastal zone. Through a series of GIS queries and spatial analyses, various aspects of infrastructure, including buildings, roads, and healthcare centers, were examined, along with the encroachment of cropland into aquatic and rare species cores. The findings from these analyses provide valuable insights that can inform decision-making processes related to coastal zone management and conservation. The findings from this project contribute to a better understanding of the spatial relationships and impacts of infrastructure and ecological habitat dynamics within the Massachusetts coastal zone, providing valuable insights for informed decision-making processes related to coastal zone management and conservation.
+
 
