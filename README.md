@@ -21,7 +21,7 @@ This project seeks to assess the distribution, density, and spatial relationship
 - Assessing the accessibility of healthcare facilities within the coastal zone helps identify areas with limited access to essential services. This information can guide efforts to improve healthcare access and address disparities in healthcare provision.
 - : By integrating spatial analysis techniques, this project supports efforts to promote sustainable development practices that balance the needs of human populations with the conservation of coastal ecosystems
 
-## Data
+## Data and Sourcces
 The data included in this repository are:
 
 1 Digitized Elevation Model(DEM) (TIF) [(https://coast.noaa.gov/slrdata/)]
