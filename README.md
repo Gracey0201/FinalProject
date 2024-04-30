@@ -127,15 +127,15 @@ _All the tables created in this analysis are normalized, that is, they are all i
 
 #### First Normal Form (1NF)
 
-- There are no multiple values stored in a single cell of these tables, thereby reducing complexity.
+There are no multiple values stored in a single cell of these tables, thereby reducing complexity.
 
 #### Second Normal Form (2NF)
 
-- Since the tables are already in 1NF, and there are no partial dependencies (that is, all non-prime attributes are depending on the entire primary key), therefore, they satisfies Second Normal Form (2NF).
+Since the tables are already in 1NF, and there are no partial dependencies (that is, all non-prime attributes are depending on the entire primary key), therefore, they satisfies Second Normal Form (2NF).
 
 #### Third Normal Form (3NF)
 
-- They also meet the requirements of 3NF as they are already in 1NF and 2NF, and there are no transitive dependencies among non-prime attributes, each non-key attribute in thes tables are  directly dependent on the primary key (gid). Therefore, they meet the requirements of the 3NF.
+They also meet the requirements of 3NF as they are already in 1NF and 2NF, and there are no transitive dependencies among non-prime attributes, each non-key attribute in thes tables are  directly dependent on the primary key (gid). Therefore, they meet the requirements of the 3NF.
 
  #### Fouth Normal Form (4NF)
 
@@ -239,6 +239,7 @@ WHERE
     AND ST_Intersects(m.geom, cz.geom);`
 
 --Overlay analysis
+
 -- Incoporating landcover layer into the analysis
 
 This query is essential in  understanding how different land use/land cover types are distributed in relation to infrastructure features, as well as provide insights into patterns of development, potential conflicts, and opportunities for land use planning and management within the coastal zone.
@@ -263,6 +264,7 @@ FROM coastalzone_vector c
 JOIN lulc l ON ST_Intersects(c.geom, l.rast);`
 
 _Buffer Analysis_
+This query creates a buffer around community health centers to assess accessibility and coverage within the coastal zone. It can can identify areas that are underserved or poorly served by healthcare facilities, informing decisions related to healthcare resource allocation and infrastructure development.
 
 `CREATE TABLE community_health_centers_buffer AS
 SELECT 
@@ -275,6 +277,8 @@ WHERE
     ST_Intersects(h.geom, cz.geom);`
 	
 _Distance Analysis_
+This query calculates distances between community health centers and roads to understand accessibility within the coastal zone. It helps assess the proximity of healthcare facilities to transportation networks, which is crucial for ensuring accessibility for coastal communities. Also, it can highlight areas with limited access to healthcare services, guiding decisions on infrastructure development and service provision.
+
 
 `CREATE TABLE chcs_in_roads AS 
 SELECT 
@@ -290,8 +294,7 @@ WHERE
     AND ST_DWithin(h.geom, r.geom, 5000);`-- considering roads within 5 km of health centers
 
 _Identify Cropland within Aquatic Core Areas_
-
-- Determining the extent of cropland within aquatic and rare species core areas
+With this query, the encroachment of cropland into aquatic and rare species cores can be identified which can fragment these natural habitats, disrupting ecosystems and reducing biodiversity. They can also contribute to water quality and quantity issue as they can contribute to water pollution through the use of fertilizers, pesticides, and herbicides, affecting water quality in aquatic habitats. Further, irrigation from cropland can reduce water resources, decreasing water availability for aquatic species and other ecosystems.
 
 `CREATE TABLE cropland_in_aquatic_core AS
 SELECT c.gid AS cropland_id,
@@ -310,7 +313,7 @@ FROM cropland_vector c
 JOIN rarespecies_clean_vector ra ON ST_Intersects(c.geom, ra.geom);`
 
 -- Overlay Analysis:
---Determine areas where building density is high within the coastal zone.
+The two queries below on major and minor roads creates new tables that contains major and minor roads and their corresponding coastal zones, providing spatial information about transportation infrastructure in coastal areas. This can be useful for various analyses, such as transportation planning, disaster response, and environmental impact assessments
 
 `CREATE TABLE majorroads_in_coastal AS
 SELECT m.gid AS roads_id,
@@ -327,6 +330,8 @@ SELECT r.gid AS roads_id,
        c.geom AS coastal_zone_geom
 FROM roads_vector r
 JOIN coastalzone_vector c ON ST_Intersects(r.geom, c.geom);`
+
+_map below is the result of the spatial queries above_
 
 ![MA Coastal Map3](https://github.com/Gracey0201/FinalProject/blob/main/query2.PNG)
 
