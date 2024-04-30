@@ -238,9 +238,10 @@ WHERE
     ST_Intersects(r.geom, cz.geom)
     AND ST_Intersects(m.geom, cz.geom);`
 
---Overlay analysis
 
 -- Incoporating landcover layer into the analysis
+
+_Overlay analysis_
 
 This query is essential in  understanding how different land use/land cover types are distributed in relation to infrastructure features, as well as provide insights into patterns of development, potential conflicts, and opportunities for land use planning and management within the coastal zone.
 
