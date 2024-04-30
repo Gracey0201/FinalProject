@@ -341,7 +341,7 @@ JOIN coastalzone_vector c ON ST_Intersects(r.geom, c.geom);`
 
 _The map below is the result on some of the spatial queries above_
 
-![MA Coastal Map3](https://github.com/Gracey0201/FinalProject/blob/main/query2.PNG)
+![MA Coastal Map3](https://github.com/Gracey0201/FinalProject/blob/main/Updated_AnalysisMap.png)
 
 ## Challenges
 - The bunk of the challenge I encountered in this project was with the elevation data. I took so long to generate the table, after which I could view the table even after it generated because of the size of the content. Also, I could create the elevation coastal tabl with the elevation data which prevented the initial objective of creating a sea level rise map. This limitation might likely stemmed from inaccuracy of the elevation data. This hindered my creation of flood inundation model and other analyses related to sea level rise impacts.
