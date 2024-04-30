@@ -63,8 +63,7 @@ I had to preform some basic preprocessing of my data before using the them. I cl
 
 - Create Sealevelrise database and enable  postgis extenstion
 - Generate tables both raster and vector needed for datanormalization in the analysis
-    - I had many vector tables which can be found below and one raster table (DEM)
-      
+
 - I converted all the shapefiles to sql files by using the shp2pgsql function. An example of this code is:
 
 `"C:\Users\default.DESKTOP-GCP9U73\OneDrive - Clark University\Documents\DATABASE MANAGEMENT\FinalProject">"C:\Program Files\PostgreSQL\16\bin\shp2pgsql" -s 4326 -I Data\Buildings.shp building_vector > building.sql`
@@ -73,23 +72,13 @@ I had to preform some basic preprocessing of my data before using the them. I cl
 
   `"C:\Users\default.DESKTOP-GCP9U73\OneDrive - Clark University\Documents\DATABASE MANAGEMENT\FinalProject">"C:\Program Files\PostgreSQL\16\bin\raster2pgsql" -s 4326 -t 1000x1000 -I -C -M  Data\Clipped_DEM.tif elevation > DEM.sql`
 
-- The newly created vector and raster sql files were added to PgAdmin database by reading the file into the already created database "sealevelrise" An example of this code is:
+ `"C:\Users\default.DESKTOP-GCP9U73\OneDrive - Clark University\Documents\DATABASE MANAGEMENT\FinalProject">"C:\Program Files\PostgreSQL\16\bin\raster2pgsql" -s 4326 -t 1000x1000 -I -C -M  Data\LULC_ClippeD.tif landcover > lulc.sql`
+
+- The newly created vector and raster sql files were imported to PgAdmin database by reading the file into the already created database "sealevelrise" An example of this code is:
   
 `pgsql -U postgres -d Flooding -f "C:\Users\rutha\OneDrive - Clark University\Documents\SpatialDatabase\FloodingProject\LocalVersion\boreholes.sql"`
 
 - I created empty tables for some of my vector layers, like the Aquatic core table, populating them with columns from the original data relevent to my analysis. Using the code below.
-
- 
-## Normalization of Tables
-Database normalization involves a systematic approach to organizing data within a database to reduce redundancy and improve data integrity.
-
-### Reasons for Normalization
-
-- To prevent redundancy in data.
-- To simplify database structure.
-- To maintain consistent relationships between tables.
-- To facilitate easier database maintenance and updates.
-
 
   _ Creating tables from existing table to extract columns needed for my analysis_
 
@@ -121,6 +110,16 @@ geom GEOMETRY
 `INSERT INTO building_clean_vector(gid, ac_ch_rare, town, ac_rscxtwn, shape_area, shape_len, geom)
 SELECT gid, ac_ch_rare, town, ac_rscxtwn, shape_area, shape_len, geom
 FROM rarespecies_vector;`
+
+## Normalization of Tables
+Database normalization involves a systematic approach to organizing data within a database to reduce redundancy and improve data integrity.
+
+### Reasons for Normalization
+
+- To prevent redundancy in data.
+- To simplify database structure.
+- To maintain consistent relationships between tables.
+- To facilitate easier database maintenance and updates.
 
 ### Checking for Normalization
 
@@ -184,12 +183,12 @@ They thsrefore satisfy the requirements for Fourth Normal Form (4NF), given that
 ## Spatial Query
 - I used the query below to speed the spatial query relating to the elevation table
 - 
-  -- Create spatial indexes for performance optimization
+-- Create spatial indexes for performance optimization
 
 `CREATE INDEX IF NOT EXISTS idx_coastalzone_geom ON coastalzone USING GIST (geom);
 CREATE INDEX IF NOT EXISTS idx_elevation_rast ON elevation USING GIST (ST_ConvexHull(rast));`
 
--- Create a table with only the coastal sections of the elevation data
+-- Then I try creating a table with only the coastal sections of the elevation data
 
 `CREATE TABLE elevation_coastal AS 
 SELECT e.rast
@@ -199,9 +198,13 @@ WHERE EXISTS (
     WHERE ST_Intersects(e.rast, c.geom)
 );`
 
+_the query ran successful but it retured no output. So I could not continue with my initial objective of creating a 1 meter sea level rise, so I could not analyze and map areas along the coast of Massachusetts that are susceptible to inundation from rising sea levels_
+
 ## Coastal Zone Analysis: Understanding Infrastructure and Habitat Dynamics in Massachusetts
+This focuses on analyzing various aspects of infrastructure (such as buildings, roads, and healthcare centers) and ecological habitat dynamics within the Massachusetts coastal zone, with the aim of understanding spatial relationships, assess impacts, which will inform decision-making processes related to coastal zone management and conservation.
 
 _Identify Infrastructure within the Coastal Zone_
+The query selects infrastructure features (buildings, cropland, community health centers, roads) that fall within the Massachusetts coastal zone boundary, which helps in identifying the extent of human activities and infrastructure development within the coastal zone.
 
 `SELECT 
     b.* -- columns from building data
@@ -235,7 +238,8 @@ WHERE
     AND ST_Intersects(m.geom, cz.geom);`
 
 --Overlay analysis
--- Incoporating landcover layer
+-- Incoporating landcover layer into the analysis
+This query is essential in  understanding how different land use/land cover types are distributed in relation to infrastructure features, as well as provide insights into patterns of development, potential conflicts, and opportunities for land use planning and management within the coastal zone.
 
 `CREATE TABLE landcover_near_building AS
 SELECT 
@@ -255,19 +259,6 @@ SELECT c.gid AS coastal_zone_id,
        l.rid
 FROM coastalzone_vector c
 JOIN lulc l ON ST_Intersects(c.geom, l.rast);`
-
-_Overlay Analysis_
-
-`SELECT 
-    l.*, -- columns from land use/land cover data
-    b.*  -- columns from building data
-FROM 
-    lulc l,
-    building_clean_vector b,
-    coastalzone_vector cz
-WHERE 
-    ST_Intersects(l.rast, b.geom)
-    AND ST_Intersects(l.rast, cz.geom);`
 
 _Buffer Analysis_
 
