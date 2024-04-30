@@ -80,7 +80,7 @@ I had to preform some basic preprocessing of my data before using the them. I cl
 
 - I created empty tables for some of my vector layers, like the Aquatic core table, populating them with columns from the original data relevent to my analysis. Using the code below.
 
-  _ Creating tables from existing table to extract columns needed for my analysis_
+-- Creating tables from existing table to extract columns needed for my analysis
 
  `CREATE TABLE aquaticcore_clean_vector(
 gid int PRIMARY KEY,
@@ -182,7 +182,7 @@ They thsrefore satisfy the requirements for Fourth Normal Form (4NF), given that
 
 ## Spatial Query
 - I used the query below to speed the spatial query relating to the elevation table
-- 
+  
 -- Create spatial indexes for performance optimization
 
 `CREATE INDEX IF NOT EXISTS idx_coastalzone_geom ON coastalzone USING GIST (geom);
@@ -198,12 +198,13 @@ WHERE EXISTS (
     WHERE ST_Intersects(e.rast, c.geom)
 );`
 
-_the query ran successful but it retured no output. So I could not continue with my initial objective of creating a 1 meter sea level rise, so I could not analyze and map areas along the coast of Massachusetts that are susceptible to inundation from rising sea levels_
+_the query ran successful but it retured no output. So, I could not continue with my initial objective of creating a 1 meter sea level rise, therefore could analyze and map areas along the coast of Massachusetts that are susceptible to inundation from rising sea levels_
 
 ## Coastal Zone Analysis: Understanding Infrastructure and Habitat Dynamics in Massachusetts
 This focuses on analyzing various aspects of infrastructure (such as buildings, roads, and healthcare centers) and ecological habitat dynamics within the Massachusetts coastal zone, with the aim of understanding spatial relationships, assess impacts, which will inform decision-making processes related to coastal zone management and conservation.
 
 _Identify Infrastructure within the Coastal Zone_
+
 The query selects infrastructure features (buildings, cropland, community health centers, roads) that fall within the Massachusetts coastal zone boundary, which helps in identifying the extent of human activities and infrastructure development within the coastal zone.
 
 `SELECT 
@@ -239,6 +240,7 @@ WHERE
 
 --Overlay analysis
 -- Incoporating landcover layer into the analysis
+
 This query is essential in  understanding how different land use/land cover types are distributed in relation to infrastructure features, as well as provide insights into patterns of development, potential conflicts, and opportunities for land use planning and management within the coastal zone.
 
 `CREATE TABLE landcover_near_building AS
