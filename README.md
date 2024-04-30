@@ -260,7 +260,7 @@ WHERE
     ST_Intersects(l.rast, b.geom)
     AND ST_Intersects(l.rast, cz.geom);`
 
-    `CREATE TABLE coastal_zone_land_use AS
+`CREATE TABLE coastal_zone_land_use AS
 SELECT c.gid AS coastal_zone_id,
        c.geom AS coastal_zone_geom,
        l.rid
@@ -339,7 +339,7 @@ SELECT r.gid AS roads_id,
 FROM roads_vector r
 JOIN coastalzone_vector c ON ST_Intersects(r.geom, c.geom);`
 
-_map below is the result of the spatial queries above_
+_The map below is the result on some of the spatial queries above_
 
 ![MA Coastal Map3](https://github.com/Gracey0201/FinalProject/blob/main/query2.PNG)
 
