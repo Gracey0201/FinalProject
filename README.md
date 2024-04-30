@@ -350,4 +350,10 @@ _map below is the result of the spatial queries above_
 ## Conclusion
 The analysis carried out in this project was focused on understanding the spatial relationships and assessing the impacts of infrastructure and ecological habitat dynamics within the Massachusetts coastal zone. Through a series of GIS queries and spatial analyses, various aspects of infrastructure, including buildings, roads, and healthcare centers, were examined, along with the encroachment of cropland into aquatic and rare species cores. The findings from these analyses provide valuable insights that can inform decision-making processes related to coastal zone management and conservation. The findings from this project contribute to a better understanding of the spatial relationships and impacts of infrastructure and ecological habitat dynamics within the Massachusetts coastal zone, providing valuable insights for informed decision-making processes related to coastal zone management and conservation.
 
+#### Useful Resouces
+
+[Raster Data Management, Queries, and Applications for PostGIS EXT](https://postgis.net/docs/using_raster_dataman.html)
+[Class website](https://studyingplace.space/spatial-database/about.html)
+
+
 
