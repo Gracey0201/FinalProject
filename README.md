@@ -86,12 +86,14 @@ I had to preform some basic preprocessing of my data before using the them. I cl
 
 -- Creating tables from existing table to extract columns needed for my analysis
 
- `CREATE TABLE aquaticcore_clean_vector(
+ ```SQL
+CREATE TABLE aquaticcore_clean_vector(
 gid int PRIMARY KEY,
 shape_area numeric,
 shape_len numeric,
 geom GEOMETRY
-);`
+);
+```
 
 -- populate the new table with columns
 
