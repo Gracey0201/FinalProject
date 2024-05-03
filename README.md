@@ -97,11 +97,14 @@ geom GEOMETRY
 
 -- populate the new table with columns
 
-`INSERT INTO floodwalls_clean_vector(gid, shape_area, shape_len,  geom)
+ ```SQL
+INSERT INTO floodwalls_clean_vector(gid, shape_area, shape_len,  geom)
 SELECT gid, shape_area, shape_len,  geom
-FROM aquaticcore_vector;`
+FROM aquaticcore_vector;
+```
 
-`CREATE TABLE rarespecies_clean_vector(
+ ```SQL
+CREATE TABLE rarespecies_clean_vector(
 gid int PRIMARY KEY,
 ac_ch_rare numeric,
 town varchar(255),
@@ -109,13 +112,15 @@ ac_rscxtwn numeric,
 shape_area numeric,
 shape_len numeric,
 geom GEOMETRY
-);`
-
+);
+```
 -- populate the new table with columns
 
-`INSERT INTO building_clean_vector(gid, ac_ch_rare, town, ac_rscxtwn, shape_area, shape_len, geom)
+ ```SQL
+INSERT INTO building_clean_vector(gid, ac_ch_rare, town, ac_rscxtwn, shape_area, shape_len, geom)
 SELECT gid, ac_ch_rare, town, ac_rscxtwn, shape_area, shape_len, geom
-FROM rarespecies_vector;`
+FROM rarespecies_vector;
+```
 
 ## Normalization of Tables
 Database normalization involves a systematic approach to organizing data within a database to reduce redundancy and improve data integrity.
@@ -191,18 +196,22 @@ They thsrefore satisfy the requirements for Fourth Normal Form (4NF), given that
   
 -- Create spatial indexes for performance optimization
 
-`CREATE INDEX IF NOT EXISTS idx_coastalzone_geom ON coastalzone USING GIST (geom);
-CREATE INDEX IF NOT EXISTS idx_elevation_rast ON elevation USING GIST (ST_ConvexHull(rast));`
+ ```SQL
+CREATE INDEX IF NOT EXISTS idx_coastalzone_geom ON coastalzone USING GIST (geom);
+CREATE INDEX IF NOT EXISTS idx_elevation_rast ON elevation USING GIST (ST_ConvexHull(rast));
+```
 
 -- Then I try creating a table with only the coastal sections of the elevation data
 
-`CREATE TABLE elevation_coastal AS 
+ ```SQL
+CREATE TABLE elevation_coastal AS 
 SELECT e.rast
 FROM elevation e
 WHERE EXISTS (
     SELECT 1 FROM coastalzone c
     WHERE ST_Intersects(e.rast, c.geom)
-);`
+);
+```
 
 _the query ran successful but it retured no output. So, I could not continue with my initial objective of creating a 1 meter sea level rise, therefore could analyze and map areas along the coast of Massachusetts that are susceptible to inundation from rising sea levels_
 
@@ -213,16 +222,18 @@ _Identify Infrastructure within the Coastal Zone_
 
 The query selects infrastructure features (buildings, cropland, community health centers, roads) that fall within the Massachusetts coastal zone boundary, which helps in identifying the extent of human activities and infrastructure development within the coastal zone.
 
-`SELECT 
+ ```SQL
+SELECT 
     b.* -- columns from building data
 FROM 
     building_clean_vector b,
     coastalzone_vector cz
 WHERE 
-    ST_Intersects(b.geom, cz.geom);`
+    ST_Intersects(b.geom, cz.geom);
+```
 	
-
-`SELECT	
+ ```SQL
+SELECT	
 	c.*, -- columns from cropland data
     h.* -- columns from health centers data
 FROM 
@@ -231,9 +242,11 @@ FROM
 	coastalzone_vector cz
 WHERE 
     ST_Intersects(c.geom, cz.geom)
-    AND ST_Intersects(h.geom, cz.geom);`
-    
-`SELECT
+    AND ST_Intersects(h.geom, cz.geom);
+```
+
+ ```SQL    
+SELECT
    r.*,  -- columns from roads data
    m.*  -- columns from major roads
 FROM 
@@ -242,7 +255,8 @@ FROM
     coastalzone_vector cz
 WHERE 
     ST_Intersects(r.geom, cz.geom)
-    AND ST_Intersects(m.geom, cz.geom);`
+    AND ST_Intersects(m.geom, cz.geom);
+```
 
 
 -- Incoporating landcover layer into the analysis
@@ -251,7 +265,8 @@ _Overlay analysis_
 
 This query is essential in  understanding how different land use/land cover types are distributed in relation to infrastructure features, as well as provide insights into patterns of development, potential conflicts, and opportunities for land use planning and management within the coastal zone.
 
-`CREATE TABLE landcover_near_building AS
+ ```SQL
+CREATE TABLE landcover_near_building AS
 SELECT l.*, -- columns from land use/land cover data
        b.*  -- columns from building data
 FROM 
@@ -260,20 +275,24 @@ FROM
     coastalzone_vector cz
 WHERE 
     ST_Intersects(l.rast, b.geom)
-    AND ST_Intersects(l.rast, cz.geom);`
+    AND ST_Intersects(l.rast, cz.geom);
+```
 
-`CREATE TABLE coastal_zone_land_use AS
+ ```SQL
+CREATE TABLE coastal_zone_land_use AS
 SELECT c.gid AS coastal_zone_id,
        c.geom AS coastal_zone_geom,
        l.rid
 FROM coastalzone_vector c
-JOIN lulc l ON ST_Intersects(c.geom, l.rast);`
+JOIN lulc l ON ST_Intersects(c.geom, l.rast);
+```
 
 _Buffer Analysis_
 
 This query creates a buffer around community health centers to assess accessibility and coverage within the coastal zone. It can can identify areas that are underserved or poorly served by healthcare facilities, informing decisions related to healthcare resource allocation and infrastructure development.
 
-`CREATE TABLE community_health_centers_buffer AS
+ ```SQL
+CREATE TABLE community_health_centers_buffer AS
 SELECT 
     h.*, -- columns from health centers data
     ST_Buffer(h.geom, 1000) AS buffer_geom -- buffer radius is 1000 meters
@@ -281,14 +300,15 @@ FROM
     community_health_clean_vector h,
     coastalzone_vector cz
 WHERE 
-    ST_Intersects(h.geom, cz.geom);`
+    ST_Intersects(h.geom, cz.geom);
+```
 	
 _Distance Analysis_
 
 This query calculates distances between community health centers and roads to understand accessibility within the coastal zone. It helps assess the proximity of healthcare facilities to transportation networks, which is crucial for ensuring accessibility for coastal communities. Also, it can highlight areas with limited access to healthcare services, guiding decisions on infrastructure development and service provision.
 
-
-`CREATE TABLE chcs_in_roads AS 
+ ```SQL
+CREATE TABLE chcs_in_roads AS 
 SELECT 
     h.gid AS community_health_center_id, 
     r.gid AS road_id, 
@@ -299,49 +319,58 @@ FROM
     coastalzone_vector cz
 WHERE 
     ST_Intersects(h.geom, cz.geom)
-    AND ST_DWithin(h.geom, r.geom, 5000);`-- considering roads within 5 km of health centers
+    AND ST_DWithin(h.geom, r.geom, 5000);-- considering roads within 5 km of health centers
+```
 
 _Identify Cropland within Aquatic Core Areas_
 
 With this query, the encroachment of cropland into aquatic and rare species cores can be identified which can fragment these natural habitats, disrupting ecosystems and reducing biodiversity. They can also contribute to water quality and quantity issue as they can contribute to water pollution through the use of fertilizers, pesticides, and herbicides, affecting water quality in aquatic habitats. Further, irrigation from cropland can reduce water resources, decreasing water availability for aquatic species and other ecosystems.
 
-`CREATE TABLE cropland_in_aquatic_core AS
+ ```SQL
+CREATE TABLE cropland_in_aquatic_core AS
 SELECT c.gid AS cropland_id,
        c.geom AS cropland_geom,
        a.gid AS aquatic_core_id,
        a.geom AS aquatic_core_geom
 FROM cropland_vector c
-JOIN aquaticcore_clean_vector a ON ST_Intersects(c.geom, a.geom);`
+JOIN aquaticcore_clean_vector a ON ST_Intersects(c.geom, a.geom);
+```
 
-`CREATE TABLE cropland_in_rare_species_core AS
+ ```SQL
+CREATE TABLE cropland_in_rare_species_core AS
 SELECT c.gid AS cropland_id,
        c.geom AS cropland_geom,
        ra.gid AS rare_species_core_id,
        ra.geom AS rare_species_core_geom
 FROM cropland_vector c
-JOIN rarespecies_clean_vector ra ON ST_Intersects(c.geom, ra.geom);`
+JOIN rarespecies_clean_vector ra ON ST_Intersects(c.geom, ra.geom);
+```
 
 _Overlay Analysis_
 
 The two queries below on major and minor roads creates new tables that contains major and minor roads and their corresponding coastal zones, providing spatial information about transportation infrastructure in coastal areas. This can be useful for various analyses, such as transportation planning, disaster response, and environmental impact assessments
 
-`CREATE TABLE majorroads_in_coastal AS
+ ```SQL
+CREATE TABLE majorroads_in_coastal AS
 SELECT m.gid AS roads_id,
        m.geom AS roads_geom,
        c.gid AS coastal_zone_id,
        c.geom AS coastal_zone_geom
 FROM majorroads_vector m
-JOIN coastalzone_vector c ON ST_Intersects(m.geom, c.geom);`
+JOIN coastalzone_vector c ON ST_Intersects(m.geom, c.geom);
+```
 
-`CREATE TABLE roads_in_coastal AS
+ ```SQL
+CREATE TABLE roads_in_coastal AS
 SELECT r.gid AS roads_id,
        r.geom AS roads_geom,
        c.gid AS coastal_zone_id,
        c.geom AS coastal_zone_geom
 FROM roads_vector r
-JOIN coastalzone_vector c ON ST_Intersects(r.geom, c.geom);`
+JOIN coastalzone_vector c ON ST_Intersects(r.geom, c.geom);
+```
 
-_The map below is the result on some of the spatial queries above_
+_The map below is the result of some of the spatial queries above_
 
 ![MA Coastal Map3](https://github.com/Gracey0201/FinalProject/blob/main/Updated_AnalysisMap.png)
 
